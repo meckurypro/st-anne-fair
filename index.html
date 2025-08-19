@@ -196,6 +196,33 @@
             transform: translateY(-1px);
         }
 
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .continue-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(46, 204, 113, 0.4);
+        }
+
         .prize-highlight {
             background: linear-gradient(135deg, #ffeaa7, #fab1a0);
             padding: 20px;
@@ -239,19 +266,24 @@
         }
 
         .success-message {
-            background: linear-gradient(135deg, #00b894, #00a085);
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
             color: white;
             padding: 30px;
             border-radius: 15px;
             text-align: center;
             display: none;
-            position: relative;
+            animation: slideIn 0.5s ease-out;
         }
 
-        .success-message.ready {
-            background: linear-gradient(135deg, #2ecc71, #27ae60);
-            border: 3px solid #2ecc71;
-            box-shadow: 0 0 20px rgba(46, 204, 113, 0.3);
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .contestant-number {
@@ -260,61 +292,58 @@
             border-radius: 12px;
             padding: 20px;
             margin: 20px 0;
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 900;
             letter-spacing: 3px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .personal-details {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .personal-details h4 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 700;
+            opacity: 0.9;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            text-align: right;
+            flex: 1;
+            margin-left: 10px;
         }
 
         .share-instructions {
             background: rgba(255, 255, 255, 0.15);
             border-radius: 10px;
             padding: 15px;
-            margin-top: 15px;
+            margin: 20px 0;
             font-size: 16px;
             font-weight: 600;
-        }
-
-        .countdown-display {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid white;
-            border-radius: 8px;
-            padding: 8px 15px;
-            font-size: 18px;
-            font-weight: 900;
-            font-family: 'Courier New', monospace;
-        }
-
-        .countdown-display.ready {
-            background: rgba(46, 204, 113, 1);
-            color: white;
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .ready-indicator {
-            display: none;
-            margin-top: 15px;
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .ready-indicator.show {
-            display: block;
-            animation: bounce 0.6s ease;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
         }
     </style>
 </head>
@@ -363,110 +392,110 @@
 
             <div class="optional-field">
                 <label for="referrer">Referred by (Contestant Number)</label>
-                <input type="text" id="referrer" name="referrer" placeholder="e.g., #001 (Leave blank if you weren't referred)">
+                <input type="text" id="referrer" name="referrer" placeholder="e.g., 415 or 1145 (Leave blank if you weren't referred)">
                 <div class="referral-info">
                     💡 If someone referred you, enter their contestant number here. You'll both get notified!
                 </div>
             </div>
 
             <button type="submit" class="submit-btn">Register for Website Giveaway</button>
+        </form>
 
-            <div class="success-message" id="successMessage">
-                <div class="countdown-display" id="countdownDisplay">01:10</div>
-                <h3>🎉 Registration Successful!</h3>
-                <div class="contestant-number" id="contestantNumber">#001</div>
-                <p><strong>This is your contestant number!</strong></p>
-                <div class="share-instructions">
-                    📢 Share this number with 3 people to qualify for the website giveaway draw at 4PM!
-                    <br><br>
-                    ✉ We've also sent this number to your email along with full instructions.
+        <div class="success-message" id="successMessage">
+            <h3>🎉 Registration Successful!</h3>
+            <div class="contestant-number" id="contestantNumber">415</div>
+            <p><strong>This is your contestant number!</strong></p>
+            
+            <div class="personal-details" id="personalDetails">
+                <h4>📋 Your Registration Details</h4>
+                <div class="detail-item">
+                    <span class="detail-label">Name:</span>
+                    <span class="detail-value" id="displayName">-</span>
                 </div>
-                <div class="ready-indicator" id="readyIndicator">
-                    💚 Ready for next registration!
+                <div class="detail-item">
+                    <span class="detail-label">Email:</span>
+                    <span class="detail-value" id="displayEmail">-</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Phone:</span>
+                    <span class="detail-value" id="displayPhone">-</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Registration Time:</span>
+                    <span class="detail-value" id="displayTime">-</span>
+                </div>
+                <div class="detail-item" id="referrerDetail" style="display: none;">
+                    <span class="detail-label">Referred by:</span>
+                    <span class="detail-value" id="displayReferrer">-</span>
                 </div>
             </div>
-        </form>
+            
+            <div class="share-instructions">
+                📢 Share your contestant number <strong id="shareNumber">415</strong> with 3 people to qualify for the website giveaway draw at 4PM!
+                <br><br>
+                ✉ We've also sent this information to your email along with full instructions.
+            </div>
+            
+            <button type="button" class="continue-btn" onclick="resetForm()">Continue - Next Registration</button>
+        </div>
     </div>
 
     <script>
-        // Generate contestant number from current time
-        function generateContestantNumber() {
+        // Generate contestant number and timestamp based on current time
+        function generateTimeData() {
             const now = new Date();
             const hours = now.getHours();
             const minutes = now.getMinutes();
             
-            // Format: HMM (e.g., 8:20am = 820, 1:45pm = 145)
+            // Create timestamp in readable format (e.g., "4:15 PM")
+            const ampm = hours >= 12 ? 'PM' : 'AM';
             const displayHour = hours > 12 ? hours - 12 : (hours === 0 ? 12 : hours);
-            const contestantNum = displayHour.toString() + minutes.toString().padStart(2, '0');
+            const timestamp = `${displayHour}:${minutes.toString().padStart(2, '0')} ${ampm}`;
             
-            return contestantNum;
+            // Create contestant number in HHMM format without colon (e.g., "415" or "1145")
+            const contestantHour = hours > 12 ? hours - 12 : (hours === 0 ? 12 : hours);
+            const contestantNumber = contestantHour.toString() + minutes.toString().padStart(2, '0');
+            // Remove leading zero if hour is single digit (e.g., "0415" becomes "415")
+            const finalContestantNumber = contestantNumber.replace(/^0/, '');
+            
+            return {
+                timestamp: timestamp,
+                contestantNumber: finalContestantNumber
+            };
         }
 
-        // Countdown functionality
-        function startCountdown() {
-            let timeLeft = 70; // 70 seconds
-            const countdownElement = document.getElementById('countdownDisplay');
-            const successMessage = document.getElementById('successMessage');
-            const readyIndicator = document.getElementById('readyIndicator');
-            
-            const countdown = setInterval(() => {
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
-                
-                countdownElement.textContent = 
-                    ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')};
-                
-                timeLeft--;
-                
-                if (timeLeft < 0) {
-                    clearInterval(countdown);
-                    countdownElement.textContent = '00:00';
-                    countdownElement.classList.add('ready');
-                    successMessage.classList.add('ready');
-                    readyIndicator.classList.add('show');
-                    
-                    // Optional: Auto-reset form after countdown
-                    setTimeout(() => {
-                        resetForm();
-                    }, 3000); // Reset after 3 more seconds
-                }
-            }, 1000);
+        // Initialize form with current time data
+        function initializeForm() {
+            const timeData = generateTimeData();
+            document.getElementById('timestamp').value = timeData.timestamp;
+            document.getElementById('contestant_number').value = timeData.contestantNumber;
         }
 
-        // Reset form function
+        // Reset form for next registration
         function resetForm() {
             const form = document.getElementById('registrationForm');
             const successMessage = document.getElementById('successMessage');
-            const countdownElement = document.getElementById('countdownDisplay');
-            const readyIndicator = document.getElementById('readyIndicator');
             
             // Reset form and show it again
             form.reset();
             form.style.display = 'block';
             form.classList.remove('loading');
             form.querySelector('.submit-btn').textContent = 'Register for Website Giveaway';
+            form.querySelector('.submit-btn').disabled = false;
             
-            // Hide success message and reset styles
+            // Hide success message
             successMessage.style.display = 'none';
-            successMessage.classList.remove('ready');
-            countdownElement.classList.remove('ready');
-            readyIndicator.classList.remove('show');
-            countdownElement.textContent = '01:10';
             
-            // Update timestamp and contestant number for next registration
-            const now = new Date();
-            document.getElementById('timestamp').value = now.toISOString();
-            const contestantNumber = generateContestantNumber();
-            document.getElementById('contestant_number').value = contestantNumber;
+            // Initialize with new time data
+            initializeForm();
         }
+
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            const now = new Date();
-            document.getElementById('timestamp').value = now.toISOString();
-            
-            const contestantNumber = generateContestantNumber();
-            document.getElementById('contestant_number').value = contestantNumber;
+            initializeForm();
         });
 
+        // Handle form submission
         document.getElementById('registrationForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -474,15 +503,22 @@
             const submitBtn = form.querySelector('.submit-btn');
             const successMessage = document.getElementById('successMessage');
             
-            // Get the contestant number from the hidden field
-            const contestantNumber = document.getElementById('contestant_number').value;
+            // Get current time data at the moment of submission
+            const timeData = generateTimeData();
+            document.getElementById('timestamp').value = timeData.timestamp;
+            document.getElementById('contestant_number').value = timeData.contestantNumber;
+            
+            // Get form values
+            const formData = new FormData(form);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const phone = formData.get('phone');
+            const referrer = formData.get('referrer');
             
             // Show loading state
             form.classList.add('loading');
             submitBtn.textContent = 'Registering...';
-            
-            // Get form data
-            const formData = new FormData(form);
+            submitBtn.disabled = true;
             
             // Submit to webhook
             fetch(form.action, {
@@ -490,21 +526,32 @@
                 body: formData
             })
             .then(response => {
-                // Display the generated contestant number immediately
-                document.getElementById('contestantNumber').textContent = '#' + contestantNumber;
+                // Display success message with personal details
+                document.getElementById('contestantNumber').textContent = timeData.contestantNumber;
+                document.getElementById('shareNumber').textContent = timeData.contestantNumber;
+                document.getElementById('displayName').textContent = name;
+                document.getElementById('displayEmail').textContent = email;
+                document.getElementById('displayPhone').textContent = phone;
+                document.getElementById('displayTime').textContent = timeData.timestamp;
+                
+                // Show referrer if provided
+                if (referrer && referrer.trim() !== '') {
+                    document.getElementById('displayReferrer').textContent = referrer;
+                    document.getElementById('referrerDetail').style.display = 'flex';
+                } else {
+                    document.getElementById('referrerDetail').style.display = 'none';
+                }
                 
                 // Hide form and show success message
                 form.style.display = 'none';
                 successMessage.style.display = 'block';
-                
-                // Start the countdown
-                startCountdown();
             })
             .catch(error => {
                 console.error('Error:', error);
                 alert('Registration failed. Please try again.');
                 form.classList.remove('loading');
                 submitBtn.textContent = 'Register for Website Giveaway';
+                submitBtn.disabled = false;
             });
         });
 
@@ -517,11 +564,11 @@
             e.target.value = value;
         });
 
-        // Format referrer number input
+        // Format referrer number input to only allow numbers
         document.getElementById('referrer').addEventListener('input', function(e) {
-            let value = e.target.value.toUpperCase();
-            if (value && !value.startsWith('#')) {
-                value = '#' + value;
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 4) {
+                value = value.slice(0, 4);
             }
             e.target.value = value;
         });
