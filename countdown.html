@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FREE Website Giveaway - St. Anne's Trade Fair</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 30%, #ec4899 70%, #3730a3 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="90" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            z-index: 1;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 600px;
+            padding: 50px;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #1e3a8a, #7c3aed, #ec4899, #6366f1, #8b5cf6);
+            background-size: 300% 300%;
+            animation: gradient 3s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .event-header {
+            margin-bottom: 40px;
+        }
+
+        .church-title {
+            font-size: 20px;
+            color: #1e293b;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .event-title {
+            font-size: 24px;
+            color: #0f172a;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .main-title {
+            font-size: 44px;
+            color: #0f172a;
+            font-weight: 900;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.15);
+            line-height: 1.1;
+        }
+
+        .countdown-section {
+            background: linear-gradient(135deg, #1e3a8a, #7c3aed);
+            color: white;
+            padding: 35px;
+            border-radius: 20px;
+            margin: 35px 0;
+            box-shadow: 0 20px 40px rgba(30, 58, 138, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .countdown-label {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .time-unit {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            border-radius: 12px;
+            padding: 15px 10px;
+            min-width: 70px;
+            backdrop-filter: blur(10px);
+        }
+
+        .time-number {
+            font-size: 24px;
+            font-weight: 900;
+            font-family: 'Courier New', monospace;
+            display: block;
+        }
+
+        .time-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        .prize-highlight {
+            background: linear-gradient(135deg, #ec4899, #be185d);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 35px 0;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(236, 72, 153, 0.3);
+        }
+
+        .prize-highlight h3 {
+            color: white;
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 18px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .prize-list {
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .how-to-participate {
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 35px 0;
+            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .how-to-participate h3 {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .participation-steps {
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+            font-size: 17px;
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        .participation-steps li {
+            margin-bottom: 8px;
+        }
+
+        .cta-section {
+            margin: 40px 0 30px 0;
+        }
+
+        .excitement-text {
+            font-size: 20px;
+            color: #0f172a;
+            font-weight: 700;
+            margin-bottom: 25px;
+            font-style: italic;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .footer-section {
+            border-top: 2px solid #ecf0f1;
+            padding-top: 30px;
+            margin-top: 40px;
+        }
+
+        .powered-by {
+            font-size: 14px;
+            color: #64748b;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .footer-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            padding: 15px 25px;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .footer-link:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        }
+
+        .website-link {
+            background: linear-gradient(135deg, #1e3a8a, #3730a3);
+            color: white !important;
+        }
+
+        .whatsapp-link {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white !important;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 25px;
+                margin: 10px;
+            }
+            
+            .main-title {
+                font-size: 32px;
+                letter-spacing: 2px;
+            }
+            
+            .countdown-timer {
+                gap: 10px;
+            }
+            
+            .time-unit {
+                min-width: 60px;
+                padding: 12px 8px;
+            }
+            
+            .time-number {
+                font-size: 20px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .footer-link {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="event-header">
+            <div class="church-title">St. Anne's Catholic Church, Itire</div>
+            <div class="event-title">Trade & Job Fair Exhibition</div>
+            <div class="main-title">FREE WEBSITE GIVEAWAY!</div>
+        </div>
+
+        <div class="countdown-section pulse">
+            <div class="countdown-label">🚀 Event Starts In:</div>
+            <div class="countdown-timer" id="countdownTimer">
+                <div class="time-unit">
+                    <span class="time-number" id="days">0</span>
+                    <span class="time-label">Days</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-number" id="hours">0</span>
+                    <span class="time-label">Hours</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-number" id="minutes">0</span>
+                    <span class="time-label">Minutes</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-number" id="seconds">0</span>
+                    <span class="time-label">Seconds</span>
+                </div>
+            </div>
+            <div style="font-size: 16px; font-weight: 600; margin-top: 15px;">
+                📅 Sunday, August 24th • 8:00 AM - 6:00 PM
+            </div>
+        </div>
+
+        <div class="prize-highlight">
+            <h3>🎉 What You Can Win:</h3>
+            <div class="prize-list">
+                ✨ Professional Website Built LIVE<br>
+                🔥 Complete with Hosting Setup<br>
+                💼 Business Branding Package<br>
+                📱 Mobile-Responsive Design<br>
+                🚀 Google Maps Integration
+            </div>
+        </div>
+
+        <div class="how-to-participate">
+            <h3>📋 How to Participate:</h3>
+            <ol class="participation-steps">
+                <li><strong>Register at our booth</strong> - Get your unique contestant number</li>
+                <li><strong>Refer 3 people</strong> - Share your number with friends/family</li>
+                <li><strong>Qualify for the draw</strong> - All referrers enter the 4PM draw</li>
+                <li><strong>Watch the magic</strong> - Winner's website built live from 4PM-6PM!</li>
+            </ol>
+        </div>
+
+        <div class="cta-section">
+            <div class="excitement-text">
+                "Don't miss this once-in-a-lifetime opportunity to get a professional website absolutely FREE!"
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <div class="powered-by">Powered by LinkAI</div>
+            <div class="footer-links">
+                <a href="https://linkai.afix.club" target="_blank" class="footer-link website-link">
+                    <svg class="icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+                    </svg>
+                    Visit Our Website
+                </a>
+                <a href="https://wa.me/2348172465247" target="_blank" class="footer-link whatsapp-link">
+                    <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                    </svg>
+                    WhatsApp DM
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Countdown to Sunday 8:00 AM
+        function updateCountdown() {
+            // Set target date to this Sunday at 8:00 AM
+            const now = new Date();
+            const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
+            
+            // Calculate days until Sunday
+            let daysUntilSunday = (7 - currentDay) % 7;
+            if (daysUntilSunday === 0 && now.getHours() >= 8) {
+                // If it's Sunday and past 8 AM, target next Sunday
+                daysUntilSunday = 7;
+            }
+            
+            const targetDate = new Date(now);
+            targetDate.setDate(now.getDate() + daysUntilSunday);
+            targetDate.setHours(8, 0, 0, 0); // 8:00 AM
+            
+            const currentTime = new Date().getTime();
+            const targetTime = targetDate.getTime();
+            const timeRemaining = targetTime - currentTime;
+            
+            if (timeRemaining > 0) {
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            } else {
+                // Event is happening now or has passed
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                
+                // Change countdown label
+                document.querySelector('.countdown-label').textContent = '🔥 Event is LIVE!';
+            }
+        }
+        
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+        
+        // Add some interactive effects
+        document.querySelectorAll('.footer-link').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.05)';
+            });
+            
+            link.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
